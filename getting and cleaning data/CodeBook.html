@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>CodeBook.md</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<h1>CodeBook.md</h1>
+
+<p>The run_analysis.R performs the following steps to clean up the data:</p>
+
+<ol>
+<li><p>Merges the training and test sets to create one data set, namely
+train/X_train.txt and test/X_test.txt &ndash; the result is a 10299 x 561 data frame.</p></li>
+<li><p>Reads file features.txt and extracts only the measurements on the mean and standard deviation for each measurement.
+The result is a 10299 x 66 data frame, </p></li>
+<li><p>Reads activity_labels.txt and applies descriptive activity names to name the activities in the data set:</p></li>
+<li><p>The script also appropriately labels the data set with descriptive names.</p></li>
+</ol>
+
+<p>The result is saved as tidy_data1.txt, a 10299x68 data frame such that the first column contains activity names, the second column contains subject IDs, and the last 66 columns are measurements. 
+The activity names are:
+walking</p>
+
+<p>walkingupstairs</p>
+
+<p>walkingdownstairs</p>
+
+<p>sitting</p>
+
+<p>standing</p>
+
+<p>laying</p>
+
+<p>Subject IDs are integers between 1 and 30 inclusive. </p>
+
+<p>All the measurements are:</p>
+
+<p>[1] &ldquo;activity&rdquo;                  &ldquo;subject&rdquo;<br/>
+ [3] &ldquo;tBodyAcc-mean-X&rdquo;           &ldquo;tBodyAcc-mean-Y&rdquo;<br/>
+ [5] &ldquo;tBodyAcc-mean-Z&rdquo;           &ldquo;tBodyAcc-std-X&rdquo;<br/>
+ [7] &ldquo;tBodyAcc-std-Y&rdquo;            &ldquo;tBodyAcc-std-Z&rdquo;<br/>
+ [9] &ldquo;tGravityAcc-mean-X&rdquo;        &ldquo;tGravityAcc-mean-Y&rdquo;<br/>
+[11] &ldquo;tGravityAcc-mean-Z&rdquo;        &ldquo;tGravityAcc-std-X&rdquo;<br/>
+[13] &ldquo;tGravityAcc-std-Y&rdquo;         &ldquo;tGravityAcc-std-Z&rdquo;<br/>
+[15] &ldquo;tBodyAccJerk-mean-X&rdquo;       &ldquo;tBodyAccJerk-mean-Y&rdquo;<br/>
+[17] &ldquo;tBodyAccJerk-mean-Z&rdquo;       &ldquo;tBodyAccJerk-std-X&rdquo;<br/>
+[19] &ldquo;tBodyAccJerk-std-Y&rdquo;        &ldquo;tBodyAccJerk-std-Z&rdquo;<br/>
+[21] &ldquo;tBodyGyro-mean-X&rdquo;          &ldquo;tBodyGyro-mean-Y&rdquo;<br/>
+[23] &ldquo;tBodyGyro-mean-Z&rdquo;          &ldquo;tBodyGyro-std-X&rdquo;<br/>
+[25] &ldquo;tBodyGyro-std-Y&rdquo;           &ldquo;tBodyGyro-std-Z&rdquo;<br/>
+[27] &ldquo;tBodyGyroJerk-mean-X&rdquo;      &ldquo;tBodyGyroJerk-mean-Y&rdquo;<br/>
+[29] &ldquo;tBodyGyroJerk-mean-Z&rdquo;      &ldquo;tBodyGyroJerk-std-X&rdquo;<br/>
+[31] &ldquo;tBodyGyroJerk-std-Y&rdquo;       &ldquo;tBodyGyroJerk-std-Z&rdquo;<br/>
+[33] &ldquo;tBodyAccMag-mean&rdquo;          &ldquo;tBodyAccMag-std&rdquo;<br/>
+[35] &ldquo;tGravityAccMag-mean&rdquo;       &ldquo;tGravityAccMag-std&rdquo;<br/>
+[37] &ldquo;tBodyAccJerkMag-mean&rdquo;      &ldquo;tBodyAccJerkMag-std&rdquo;<br/>
+[39] &ldquo;tBodyGyroMag-mean&rdquo;         &ldquo;tBodyGyroMag-std&rdquo;<br/>
+[41] &ldquo;tBodyGyroJerkMag-mean&rdquo;     &ldquo;tBodyGyroJerkMag-std&rdquo;<br/>
+[43] &ldquo;fBodyAcc-mean-X&rdquo;           &ldquo;fBodyAcc-mean-Y&rdquo;<br/>
+[45] &ldquo;fBodyAcc-mean-Z&rdquo;           &ldquo;fBodyAcc-std-X&rdquo;<br/>
+[47] &ldquo;fBodyAcc-std-Y&rdquo;            &ldquo;fBodyAcc-std-Z&rdquo;<br/>
+[49] &ldquo;fBodyAccJerk-mean-X&rdquo;       &ldquo;fBodyAccJerk-mean-Y&rdquo;<br/>
+[51] &ldquo;fBodyAccJerk-mean-Z&rdquo;       &ldquo;fBodyAccJerk-std-X&rdquo;<br/>
+[53] &ldquo;fBodyAccJerk-std-Y&rdquo;        &ldquo;fBodyAccJerk-std-Z&rdquo;<br/>
+[55] &ldquo;fBodyGyro-mean-X&rdquo;          &ldquo;fBodyGyro-mean-Y&rdquo;<br/>
+[57] &ldquo;fBodyGyro-mean-Z&rdquo;          &ldquo;fBodyGyro-std-X&rdquo;<br/>
+[59] &ldquo;fBodyGyro-std-Y&rdquo;           &ldquo;fBodyGyro-std-Z&rdquo;<br/>
+[61] &ldquo;fBodyAccMag-mean&rdquo;          &ldquo;fBodyAccMag-std&rdquo;<br/>
+[63] &ldquo;fBodyBodyAccJerkMag-mean&rdquo;  &ldquo;fBodyBodyAccJerkMag-std&rdquo;<br/>
+[65] &ldquo;fBodyBodyGyroMag-mean&rdquo;     &ldquo;fBodyBodyGyroMag-std&rdquo;<br/>
+[67] &ldquo;fBodyBodyGyroJerkMag-mean&rdquo; &ldquo;fBodyBodyGyroJerkMag-std&rdquo; </p>
+
+<p>5.Finally, the script creates a 2nd, independent tidy data set with the average of each measurement for each activity and each subject.
+The result is saved as tidy_data2.txt, a 180x68 data frame, where as before, the first column contains activity names, the second column contains subject IDs,and then the averages for each of the 66 attributes are in columns 3&hellip;68. There are 180 rows in this data set with averages.</p>
+
+</body>
+
+</html>
+
