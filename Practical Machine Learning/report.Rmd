@@ -1,0 +1,70 @@
+Prediction of Weight Lifting Style
+========================================================
+
+## Abstract
+
+Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this paper we examine whether we can determine the weight lifting form using the accelerometer data collected.
+
+## Loading data and packages
+
+```{r}
+training0 <- read.csv('pml-training.csv')
+testing0 <- read.csv('pml-testing.csv')
+library(caret)
+```
+## Separate training data 
+
+Separate training data provided into two groups. One for training and the other for cross validation.
+
+```{r}
+set.seed(1)
+trainingIndex <- createDataPartition(training0$classe, p=.6, list=FALSE )
+training = training0[trainingIndex,]
+cv = training0[-trainingIndex,]
+```
+
+## Select the numeric columns from the data assign the missing value and 
+
+```{r}
+library(RANN)
+idx = which(lapply(training0,class) %in% c('numeric'))
+assign <- preProcess(training0[,idx], method=c('knnImpute'))
+training<-cbind(training$classe, predict(assign, training[,idx]))
+cv<-cbind(cv$classe, predict(assign, cv[,idx]))
+testing0<-predict(assign, testing0[, idx])
+colnames(training)[1] <- "classe"
+colnames(cv)[1] <- "classe"
+```
+
+## Model of random forest
+
+```{r}
+library(randomForest)
+model  <- randomForest(classe ~ ., training)
+```
+
+### In-sample accuracy
+```{r}
+t_pre <- predict(model, training) 
+library(e1071)
+print(confusionMatrix(t_pre, training$classe))
+```
+The sample accuracy is almost 100%.
+
+## Cross Validation
+
+### Out-of-sample accuracy
+```{r}
+c_pre <- predict(model, cv) 
+print(confusionMatrix(c_pre, cv$classe))
+```
+The out-of-sample accuracy is over 97.7%.
+
+## Prediction results of the testing data
+
+Applying the model of random forest to the test data we can get the predict value.
+```{r}
+predict(model, testing0) 
+```
+We can conclude that the random forest model predict the weight lifting very well.
+
